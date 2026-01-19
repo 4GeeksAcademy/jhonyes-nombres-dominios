@@ -30,8 +30,8 @@ const generarDominios = () => {
     });
 
     return {
-        listadoDominios: listadoDominios,
-        totalDominios: listadoDominios.length,
+        listado: listadoDominios,
+        total: listadoDominios.length,
     };
 };
 
@@ -39,9 +39,9 @@ window.onload = function () {
     //write your code here
     const listaDominios = document.getElementById('lista_dominios');
     const dominiosGenerados = document.getElementById('dominios_generados');
-    const obtenerDominios = generarDominios();
+    const dominios = generarDominios();
 
-    obtenerDominios.listadoDominios.map((dominio) => {
+    dominios.listado.map((dominio) => {
         const option = document.createElement('option');
 
         option.value = dominio;
@@ -50,5 +50,5 @@ window.onload = function () {
         listaDominios.appendChild(option);
         console.log(dominio);
     });
-    dominiosGenerados.innerHTML = `Total dominios generados: ${obtenerDominios.totalDominios}`;
+    dominiosGenerados.innerHTML = `Total dominios generados: ${dominios.total}`;
 };
