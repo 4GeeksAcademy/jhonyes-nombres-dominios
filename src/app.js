@@ -15,24 +15,40 @@ const domainHack = (palabra, extension) => {
         : `${palabra}.${extension}`;
 };
 
-window.onload = function () {
-    //write your code here
-    const listaDominios = document.getElementById('lista_dominios');
+const generarDominios = () => {
+    let listadoDominios = [];
 
     pronoun.map((p) => {
         adj.map((a) => {
             noun.map((n) => {
                 extensions.map((e) => {
-                    const option = document.createElement('option');
                     let palabra = `${p}${a}${n}`;
-
-                    option.value = domainHack(palabra, e);
-                    option.textContent = option.value;
-                    listaDominios.appendChild(option);
-
-                    console.log(domainHack(palabra, e));
+                    listadoDominios.push(domainHack(palabra, e));
                 });
             });
         });
     });
+
+    return {
+        listadoDominios: listadoDominios,
+        totalDominios: listadoDominios.length,
+    };
+};
+
+window.onload = function () {
+    //write your code here
+    const listaDominios = document.getElementById('lista_dominios');
+    const dominiosGenerados = document.getElementById('dominios_generados');
+    const obtenerDominios = generarDominios();
+
+    obtenerDominios.listadoDominios.map((dominio) => {
+        const option = document.createElement('option');
+
+        option.value = dominio;
+        option.textContent = dominio;
+
+        listaDominios.appendChild(option);
+        console.log(dominio);
+    });
+    dominiosGenerados.innerHTML = `Total dominios generados: ${obtenerDominios.totalDominios}`;
 };
